@@ -13,8 +13,23 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
           if (($argument1 - $argument2) > $arg_max){
             $result=false;
           }else{
-             $result=false;
+             $result=true;
           }
+          break;
+	case '*':
+          if (($argument1 * $argument2) > $arg_max){
+            $result=false;
+          }else{
+             $result=true;
+          }
+          break;
+	case '/':
+             if ((($argument1 * $argument2) > $arg_max) && ($argument!= 0)){
+               $result=false;
+             }else{
+                $result=true;
+             }
+
           break;
       default:
       echo 'Unknown operator';
@@ -42,9 +57,19 @@ function gen_new_problem($arg_min,$arg_max,$oper){
 }
 
 function display_math_problem($argument1,$oper,$argument2){
-   echo "$argument1 $oper $argument2 = ";
+
+   echo "<table>"
+	."<tr><td> ";
+   for($i = 0;$i< $argument1;$i++){
+      echo "<img src=img/penguin.gif height=50 width=50>";
+   }
+   echo "</td><td></td><td>";
+   for($i = 0;$i< $argument2;$i++){
+      echo "<img src=img/penguin.gif height=50 width=50>";
+   }
+   echo "</td><td></td></tr><tr><td align=center>";
+   echo "$argument1</td><td align=center> $oper</td><td align=center> $argument2  </td><td>=<input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
 }
 
-#echo gen_new_problem(0,10,'+');
 
 ?>

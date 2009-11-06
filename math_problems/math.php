@@ -72,4 +72,48 @@ function display_math_problem($argument1,$oper,$argument2){
 }
 
 
+function display_progress(){
+   echo "Correct: ".$_SESSION['correct']."<br/>";
+   echo "Incorrect: ".$_SESSION['incorrect']."</br>";
+   echo "Percentage:".($_SESSION['correct'] / ($_SESSION['correct'] + $_SESSION['incorrect'] )*100);
+}
+
+function mySession(){
+   if (isset($_REQUEST['num_questions']) && !isset($_SESSION['num_questions'])){
+      $_SESSION['num_questions'] = $_REQUEST['num_questions'];
+      $_SESSION['correct'] = 0;
+      $_SESSION['incorrect'] =0;
+   }
+
+   if(!isset($_SESSION['num_questions'])){
+      $_SESSION['num_questions'] = 10;
+      $_SESSION['correct'] = 0;
+      $_SESSION['incorrect'] =0;
+   }
+}
+
+function verifyResult(){
+   if(isset($_POST['argument1'])){
+      switch($_POST['oper']){
+         case '+': 
+               if($_SESSION['num_questions'] > 0){
+                  if($_POST['argument1'] + $_POST['argument2'] == $_POST['result']){
+                     $_SESSION['correct']++;
+                     $_SESSION['iscorrect'] = true;
+                  }else{
+                     $_SESSION['incorrect']++;
+                     $_SESSION['iscorrect'] = false;
+                  } 
+                  #Count down the questions as they are answered.
+                  $_SESSION['num_questions']--;
+               }
+            break;
+         default:
+            break;
+      }      
+
+
+   }
+
+}
 ?>

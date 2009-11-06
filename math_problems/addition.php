@@ -30,6 +30,11 @@ echo "<p>";
 gen_new_problem(0,10,'+');
 ?>
 </form>
+<script language="javascript">
+<!--
+document.form1.result.focus()
+//-->
+</script>
 </body>
 </html>
 <?php 

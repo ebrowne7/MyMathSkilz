@@ -57,8 +57,17 @@ function gen_new_problem($arg_min,$arg_max,$oper){
 }
 
 function display_math_problem($argument1,$oper,$argument2){
-   $img = array("apple.gif","grapes.gif", "penguin.gif", "puimpin.gif", "vegetable-01.gif", "vegetable-02.gif");
-   $randimg = $img[rand(0,5)];
+   $dir ="img";
+   if (is_dir($dir)) {
+    if ($dh = opendir($dir)) {
+        for($i=0;($file = readdir($dh)) !== false; $i++) {
+            $img[$i]=  $file;
+        }
+        closedir($dh);
+    }
+   }
+   #$img = array("apple.gif","grapes.gif", "penguin.gif", "puimpin.gif", "vegetable-01.gif", "vegetable-02.gif");
+   $randimg = $img[rand(0,count($img)-1)];
 
    echo "<table>"
 	."<tr><td> ";

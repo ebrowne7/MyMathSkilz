@@ -68,7 +68,7 @@ function display_math_problem($argument1,$oper,$argument2){
       echo "<img src=img/penguin.gif height=50 width=50>";
    }
    echo "</td><td></td></tr><tr><td align=center>";
-   echo "$argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$arguemnt2></td><td>=<input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='true'>";
+   echo "$argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=<input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
 }
 
 

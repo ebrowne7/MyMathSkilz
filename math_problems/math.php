@@ -10,7 +10,7 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
 	  }
           break;
        case '-':
-          if (($argument1 - $argument2) > $arg_max){
+          if (($argument1 - $argument2) > $arg_max && ($argument - $argument2) < $arg_min){
             $result=false;
           }else{
              $result=true;
@@ -74,8 +74,8 @@ function display_math_problem($argument1,$oper,$argument2){
    if($randimg == '' ){
       $randimg='blank.gif';
    }
-   echo "<table>
-	<tr><td> ";
+   echo "<table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
+	<tr valign=top><td > ";
    if($argument1 == 0 ){
       echo "<img src='img/blank.gif'>";
    }
@@ -85,7 +85,7 @@ function display_math_problem($argument1,$oper,$argument2){
          echo "<br/>";
       }
    }
-   echo "</td><td><img src='img/blank.gif'></td><td>";
+   echo "</td><td ><img src='img/blank.gif'></td><td >";
    if($argument2 == 0 ){
       echo "<img src='img/blank.gif'>";
    }
@@ -95,8 +95,8 @@ function display_math_problem($argument1,$oper,$argument2){
          echo "<br/>";
       }
    }
-   echo "</td><td></td></tr><tr><td align=center>
-   $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=<input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
+   echo "</td><td >&nbsp;</td><td>&nbsp;</td></tr><tr ><td align=center>
+   $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
 }
 
 
@@ -140,6 +140,8 @@ function verifyResult(){
                   #Count down the questions as they are answered.
                   $_SESSION['num_questions']--;
                }
+            break;
+	 case '-':
             break;
          default:
             break;

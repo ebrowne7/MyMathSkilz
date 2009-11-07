@@ -96,8 +96,10 @@ function display_math_problem($argument1,$oper,$argument2){
    if($randimg == '' ){
       $randimg='blank.gif';
    }
+
    echo "<table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
 	<tr valign=top><td > ";
+
    if($argument1 == 0 ){
       echo "<img src='img/blank.gif'>";
    }
@@ -119,6 +121,7 @@ function display_math_problem($argument1,$oper,$argument2){
    }
    echo "</td><td >&nbsp;</td><td>&nbsp;</td></tr><tr ><td align=center>
    $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
+
 }
 
 

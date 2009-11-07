@@ -69,7 +69,11 @@ function display_math_problem($argument1,$oper,$argument2){
     }
    }
    #$img = array("apple.gif","grapes.gif", "penguin.gif", "puimpin.gif", "vegetable-01.gif", "vegetable-02.gif");
-   $randimg = $img[rand(0,count($img)-1)];
+   
+   $randimg = $img[rand(0,(count($img) - 1))];
+   if($randimg == '' ){
+      $randimg='blank.gif';
+   }
    echo "<table>
 	<tr><td> ";
    if($argument1 == 0 ){
@@ -77,7 +81,7 @@ function display_math_problem($argument1,$oper,$argument2){
    }
    for($i = 0;$i< $argument1;$i++){
       echo "<img src='img/$randimg' >";
-      if (($i !== 0) && ($i % 5) ==0){ 
+      if (($i !== 0) && (($i+1) % 5) ==0){ 
          echo "<br/>";
       }
    }
@@ -87,7 +91,7 @@ function display_math_problem($argument1,$oper,$argument2){
    }
    for($i = 0;$i< $argument2;$i++){
       echo "<img src='img/$randimg' >";
-      if (($i !== 0) && ($i % 5) ==0){
+      if (($i !== 0) && (($i+1) % 5) ==0){
          echo "<br/>";
       }
    }

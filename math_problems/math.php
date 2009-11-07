@@ -24,7 +24,7 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
           }
           break;
 	case '/':
-             if (($argument2 != 0 ) && (($argument1 / $argument2) > $arg_max) ){
+             if (($argument2 !== 0 ) && (($argument1 / $argument2) > $arg_max) ){
                $result=false;
              }else{
                 $result=true;
@@ -61,32 +61,50 @@ function display_math_problem($argument1,$oper,$argument2){
    if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
         for($i=0;($file = readdir($dh)) !== false; $i++) {
-            $img[$i]=  $file;
+               if(!is_dir($file)){
+               $img[$i]=  $file;
+               }
         }
         closedir($dh);
     }
    }
    #$img = array("apple.gif","grapes.gif", "penguin.gif", "puimpin.gif", "vegetable-01.gif", "vegetable-02.gif");
    $randimg = $img[rand(0,count($img)-1)];
-
-   echo "<table>"
-	."<tr><td> ";
+   echo "<table>
+	<tr><td> ";
+   if($argument1 == 0 ){
+      echo "<img src='img/blank.gif'>";
+   }
    for($i = 0;$i< $argument1;$i++){
-      echo "<img src=img/$randimg >";
+      echo "<img src='img/$randimg' >";
+      if (($i !== 0) && ($i % 5) ==0){ 
+         echo "<br/>";
+      }
    }
-   echo "</td><td></td><td>";
+   echo "</td><td><img src='img/blank.gif'></td><td>";
+   if($argument2 == 0 ){
+      echo "<img src='img/blank.gif'>";
+   }
    for($i = 0;$i< $argument2;$i++){
-      echo "<img src=img/$randimg >";
+      echo "<img src='img/$randimg' >";
+      if (($i !== 0) && ($i % 5) ==0){
+         echo "<br/>";
+      }
    }
-   echo "</td><td></td></tr><tr><td align=center>";
-   echo "$argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=<input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
+   echo "</td><td></td></tr><tr><td align=center>
+   $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=<input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
 }
 
 
 function display_progress(){
-   echo "Correct: ".$_SESSION['correct']."<br/>";
-   echo "Incorrect: ".$_SESSION['incorrect']."</br>";
-   echo "Percentage:".($_SESSION['correct'] / ($_SESSION['correct'] + $_SESSION['incorrect'] )*100);
+   echo "Correct: ".$_SESSION['correct']."<br/>
+   Incorrect: ".$_SESSION['incorrect']."</br>
+   Percentage: ";
+ if(($_SESSION['correct'] + $_SESSION['incorrect'] ) == 0){
+   echo '0';
+ }else{
+   echo ($_SESSION['correct'] / ($_SESSION['correct'] + $_SESSION['incorrect'] )*100);
+ }
 }
 
 function mySession(){

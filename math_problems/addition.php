@@ -23,7 +23,6 @@ if (isset($_SESSION['iscorrect'])){
    }else{
       echo "<H3><font color=red>Incorrect</font></H3>";
    }
-   display_progress();
 }
 echo "<p>";
 
@@ -35,6 +34,11 @@ gen_new_problem(0,10,'+');
 document.form1.result.focus()
 //-->
 </script>
+<br/>
+<br/>
+<?php
+   display_progress();
+?>
 </body>
 </html>
 <?php 
@@ -42,7 +46,7 @@ document.form1.result.focus()
 ?>
 <html>
 <body>
-<form method='post' action='addition.php'>
+<form method='post' action='../index.html'>
 <?php 
 display_progress();
 session_destroy();

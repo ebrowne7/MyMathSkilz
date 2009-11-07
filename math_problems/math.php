@@ -56,24 +56,42 @@ function gen_new_problem($arg_min,$arg_max,$oper){
 
 }
 
-function display_math_problem($argument1,$oper,$argument2){
-   $dir ="img";
+function get_image($oper){
+   switch($oper){
+      case '+':
+         $dir ="img/add";
+         break;
+      case '-':
+	 $dir="img/sub";
+         break;
+      default:
+         break;
+   }
+
    $ignore = array('.','..');
    if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
-        for($i=0;($file = readdir($dh)) !== false; $i++) {
-               if(!is_dir($file)){
+        while(($file = readdir($dh)) !== false) {
+            if(!is_dir($file)){
                if(!in_array($file,$ignore,TRUE)){
-               if($file !== NULL){
-               $img[]=  $file;
+                  if($file !== NULL){
+                     $img[]=  $file;
+                  }
                }
-               }
-               }
+            }
         }
         closedir($dh);
+        #for($i=0;$i<count($img);$i++){
+        #   echo "'$img[$i]'<br>";
+        #}     
+        #echo $i."<br>";
     }
    }
-   
+   return $img;
+}
+
+function display_math_problem($argument1,$oper,$argument2){
+   $img = get_image($oper);
    $randimg = $img[rand(0,(count($img) - 1))];
    if($randimg == '' ){
       $randimg='blank.gif';

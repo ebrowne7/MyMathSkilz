@@ -106,7 +106,7 @@ function display_math_problem($argument1,$oper,$argument2){
       echo "<td colspan =5>";
    }
    
-
+   if(!$_SESSION['noimage']){
       if($argument1 == 0 ){
          echo "<img src='img/blank.gif'>";
       }
@@ -146,6 +146,9 @@ function display_math_problem($argument1,$oper,$argument2){
             }
          }
       }
+   }else{
+      echo "</td><td ><img src='img/blank.gif'></td><td >";
+   }
 
 if($oper == '+'){
    echo "</td><td >&nbsp;</td><td>&nbsp;</td></tr><tr ><td align=center>

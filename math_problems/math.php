@@ -42,14 +42,22 @@ function get_new_number($arg_min,$arg_max){
    return rand($arg_min,$arg_max);
 }
 
-function gen_new_problem($arg_min,$arg_max,$oper){
+function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false){
    $argument1 = get_new_number($arg_min,$arg_max);
-   $argument2 = get_new_number($arg_min,$arg_max);
+   if (!$doubles){
+      $argument2 = get_new_number($arg_min,$arg_max);
+   }else{
+      $argument2 = $argument1;
+   }
    #echo $argument1.' '.$argument2."\n";
    
    while(!check_problem($argument1,$oper,$argument2,$arg_min,$arg_max)){
       $argument1 = get_new_number($arg_min,$arg_max);
-      $argument2 = get_new_number($arg_min,$arg_max);
+      if(!$doubles){
+         $argument2 = get_new_number($arg_min,$arg_max);
+      }else{
+         $argument2 = $argument1; 
+      }
       
    }
    display_math_problem($argument1,$oper,$argument2);

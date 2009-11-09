@@ -12,7 +12,7 @@ if($_SESSION['num_questions'] > 0){
 <html>
 <body>
 
-<form name=form1 method='post' action=subtraction.php>
+<form name=form1 method='post' action=subtraction_to_20.php>
 <?php 
 #foreach($_POST as $key => $value){
 #   echo "Name: $key, Value: $value <br/>";

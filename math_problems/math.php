@@ -64,39 +64,6 @@ function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false){
 
 }
 
-function get_image($oper){
-   switch($oper){
-      case '+':
-         $dir ="img/add";
-         break;
-      case '-':
-	 $dir="img/sub";
-         break;
-      default:
-         break;
-   }
-
-   $ignore = array('.','..');
-   if (is_dir($dir)) {
-    if ($dh = opendir($dir)) {
-        while(($file = readdir($dh)) !== false) {
-            if(!is_dir($file)){
-               if(!in_array($file,$ignore,TRUE)){
-                  if($file !== NULL){
-                     $img[]=  $file;
-                  }
-               }
-            }
-        }
-        closedir($dh);
-        #for($i=0;$i<count($img);$i++){
-        #   echo "'$img[$i]'<br>";
-        #}     
-        #echo $i."<br>";
-    }
-   }
-   return $img;
-}
 
 function display_math_problem($argument1,$oper,$argument2){
    $img = get_image($oper);
@@ -166,32 +133,6 @@ if($oper == '+'){
    $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
 }
 
-}
-
-
-function display_progress(){
-   echo "Correct: ".$_SESSION['correct']."<br/>
-   Incorrect: ".$_SESSION['incorrect']."</br>
-   Percentage: ";
- if(($_SESSION['correct'] + $_SESSION['incorrect'] ) == 0){
-   echo '0';
- }else{
-   echo ($_SESSION['correct'] / ($_SESSION['correct'] + $_SESSION['incorrect'] )*100);
- }
-}
-
-function mySession(){
-   if (isset($_REQUEST['num_questions']) && !isset($_SESSION['num_questions'])){
-      $_SESSION['num_questions'] = $_REQUEST['num_questions'];
-      $_SESSION['correct'] = 0;
-      $_SESSION['incorrect'] =0;
-   }
-
-   if(!isset($_SESSION['num_questions'])){
-      $_SESSION['num_questions'] = 10;
-      $_SESSION['correct'] = 0;
-      $_SESSION['incorrect'] =0;
-   }
 }
 
 function verifyResult(){

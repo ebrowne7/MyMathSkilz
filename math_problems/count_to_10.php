@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include("./common.php");
-include("./math.php");
+include("./counting.php");
 mySession();
 
 verifyResult();
@@ -13,7 +13,7 @@ if($_SESSION['num_questions'] > 0){
 <html>
 <body>
 
-<form name=form1 method='post' action=addition.php>
+<form name=form1 method='post' action=count_to_10.php>
 <?php 
 #foreach($_POST as $key => $value){
 #   echo "Name: $key, Value: $value <br/>";
@@ -27,7 +27,7 @@ if (isset($_SESSION['iscorrect'])){
 }
 echo "<p>";
 
-gen_new_problem(0,10,'+');
+gen_new_problem(0,10);
 ?>
 </form>
 <script language="javascript">

@@ -1,6 +1,7 @@
 <?php 
 session_start();
 $_SESSION['noimage']=true;
+include("./common.php");
 include("./math.php");
 mySession();
 

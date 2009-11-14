@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include("./common.php");
-include("./math.php");
+include(".include/common.php");
+include(".include/math.php");
 mySession();
 
 verifyResult();

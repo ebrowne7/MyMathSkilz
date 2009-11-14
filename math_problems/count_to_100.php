@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include("./common.php");
-include("./counting.php");
+include(".include/common.php");
+include(".include/counting.php");
 mySession();
 
 verifyCountingResult();

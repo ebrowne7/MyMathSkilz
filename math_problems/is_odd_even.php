@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include("./common.php");
-include("./odd_even.php");
+include(".include/common.php");
+include(".include/odd_even.php");
 mySession();
 
 verifyOddEvenResult();

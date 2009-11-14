@@ -47,14 +47,12 @@ document.form1.result.focus()
 ?>
 <html>
 <body>
-<form method='post' action='../index.html'>
 <?php 
 display_progress();
 session_destroy();
 echo "<br/>";
 ?>
-<input type=submit value=submit>
-</form>
+<a href=../index.html>Main</a>
 </body>
 </html>
 <?php

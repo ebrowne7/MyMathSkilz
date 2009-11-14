@@ -4,7 +4,7 @@ include("./common.php");
 include("./counting.php");
 mySession();
 
-verifyResult();
+verifyCountingResult();
    
 ?>
 <?php 
@@ -27,7 +27,7 @@ if (isset($_SESSION['iscorrect'])){
 }
 echo "<p>";
 
-gen_new_problem(0,20);
+gen_new_counting_problem(0,20);
 ?>
 </form>
 <script language="javascript">

@@ -38,9 +38,7 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
    return $result;
 }
 
-function get_new_number($arg_min,$arg_max){
-   return rand($arg_min,$arg_max);
-}
+
 
 function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false){
    $argument1 = get_new_number($arg_min,$arg_max);

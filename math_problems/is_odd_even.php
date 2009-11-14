@@ -1,10 +1,10 @@
 <?php 
 session_start();
 include("./common.php");
-include("./counting.php");
+include("./odd_even.php");
 mySession();
 
-verifyCountingResult();
+verifyOddEvenResult();
    
 ?>
 <?php 
@@ -13,7 +13,7 @@ if($_SESSION['num_questions'] > 0){
 <html>
 <body>
 
-<form name=form1 method='post' action=count_to_10.php>
+<form name=form1 method='post' action=is_odd_even.php>
 <?php 
 #foreach($_POST as $key => $value){
 #   echo "Name: $key, Value: $value <br/>";
@@ -27,7 +27,7 @@ if (isset($_SESSION['iscorrect'])){
 }
 echo "<p>";
 
-gen_new_counting_problem(0,10);
+gen_new_odd_even_problem(0,10);
 ?>
 </form>
 <script language="javascript">

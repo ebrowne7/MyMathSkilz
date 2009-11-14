@@ -58,4 +58,16 @@ function display_progress(){
  }
 }
 
+function get_new_number($arg_min,$arg_max){
+   return rand($arg_min,$arg_max);
+}
+
+function is_odd($argument1){
+  if (($argument1 & 1) == 1 ){
+     return "Odd";
+  }else{
+   return "Even";
+  }
+}
+
 ?>

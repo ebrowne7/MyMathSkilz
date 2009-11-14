@@ -1,20 +1,20 @@
 <?php
-function gen_new_counting_problem($arg_min,$arg_max){
+function gen_new_odd_even_problem($arg_min,$arg_max){
    $argument1 = get_new_number($arg_min,$arg_max);
    #echo $argument1.' '.$argument2."\n";
    
-   display_counting_problem($argument1);
+   display_odd_even_problem($argument1);
 
 }
 
-function display_counting_problem($argument1){
+function display_odd_even_problem($argument1){
    $img = get_image('+');
    $randimg = $img[rand(0,(count($img) - 1))];
    if($randimg == '' ){
       $randimg='blank.gif';
    }
 
-   echo "<table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
+   echo "<table border=0 valign=top cellpadding=0 cellspacing=0>
 	<tr valign=top>";
 
       echo "<td > ";
@@ -24,27 +24,20 @@ function display_counting_problem($argument1){
       }
       for($i = 0;$i< $argument1;$i++){
          echo "<img src='img/add/$randimg' >";
-         if ($argument1 < 20){
-         if (($i !== 0) && (($i+1) % 5) ==0){ 
-            echo "<br/>";
-         }
-         }else{
-         if (($i !== 0) && (($i+1) % 10) ==0){ 
-            echo "<br/>";
-         }
-
+         if (($i !== 0) && (($i+1) % 2) ==0){ 
+            echo "</td><td>&nbsp;&nbsp;</td><td>";
          }
       }
-      echo "</td>";
+      echo "</td></tr></table>";
 
-   echo "</tr><tr><td><input type=hidden name=argument1 value=$argument1>How Manay ? <input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
+   echo "<table><tr><td><input type=hidden name=argument1 value=$argument1>$argument1 is Odd or Even ?</td></tr><tr><td> <input type=radio name='Odd_Even' value='Odd' >Odd </td></tr><td><input type=radio name='Odd_Even' value='Even'>Even</td></tr></table><input type=submit value='submit'>";
 
 }
 
-function verifyCountingResult(){
+function verifyOddEvenResult(){
    if(isset($_POST['argument1'])){
       if($_SESSION['num_questions'] > 0){
-         if($_POST['argument1'] == $_POST['result']){
+         if(strcmp(is_odd($_POST['argument1']), $_POST['Odd_Even'])==0){
              $_SESSION['correct']++;
              $_SESSION['iscorrect'] = true;
          }else{

@@ -40,7 +40,7 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
 
 
 
-function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false){
+function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false,$nf=true){
    $argument1 = get_new_number($arg_min,$arg_max);
    if (!$doubles){
       $argument2 = get_new_number($arg_min,$arg_max);
@@ -58,27 +58,38 @@ function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false){
       }
       
    }
-   display_math_problem($argument1,$oper,$argument2);
+   display_math_problem($argument1,$oper,$argument2,$nf);
 
 }
 
 
-function display_math_problem($argument1,$oper,$argument2){
+function display_math_problem($argument1,$oper,$argument2,$nf=true){
    $img = get_image($oper);
    $randimg = $img[rand(0,(count($img) - 1))];
    if($randimg == '' ){
       $randimg='blank.gif';
    }
 
+   if($nf){
    echo "<table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
 	<tr valign=top>";
+   }else{
+   echo "<table border=0 valign=top cellpadding=0 cellspacing=0>
+	<tr valign=top>";
+
+   }
 
    if($oper == '+'){
       echo "<td > ";
    }else{
+      if($nf){
       echo "<td colspan =5>";
+      }else{
+      echo "<td >";
+      }
    }
-   
+
+   if($nf){
    if(!$_SESSION['noimage']){
       if($argument1 == 0 ){
          echo "<img src='img/blank.gif'>";
@@ -122,13 +133,20 @@ function display_math_problem($argument1,$oper,$argument2){
    }else{
       echo "</td><td ><img src='img/blank.gif'></td><td >";
    }
-
+   }else{
+   echo "</td><td>$argument1</td></tr><tr><td>$oper</td><td>$argument2</td></tr><tr><td colspan=2><hr></td></tr><td colspan=2>";
+   }
+if($nf){
 if($oper == '+'){
    echo "</td><td >&nbsp;</td><td>&nbsp;</td></tr><tr ><td align=center>
    $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
 }else{
    echo "</td></tr><tr ><td align=center>
    $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> $oper <input type=hidden name=oper value=$oper></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=text name='result' value='' size='5'> </td></tr></table><input type=submit value='submit'>";
+}
+}else{
+   echo " <input type=hidden name=argument1 value=$argument1><input type=hidden name=oper value=$oper><input type=hidden name=argument2 value=$argument2><input type=text name='result' value='' size='5'> </td></tr></table><br><input type=submit value='submit'>";
+
 }
 
 }

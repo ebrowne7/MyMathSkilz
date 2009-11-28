@@ -10,6 +10,7 @@ function display_countingtable_problem($argument1,$argument2){
    echo "Complete the table<br><table  border=1 valign=top cellpadding=0 cellspacing=0>
 	<tr valign=top>";
       $x = 0; 
+      $results ='';
       for($i = $argument1;$i<= $argument2;$i++){
          if($i <= 3){
          echo "<td >$i&nbsp;&nbsp;&nbsp;&nbsp;</td>";
@@ -17,7 +18,9 @@ function display_countingtable_problem($argument1,$argument2){
             if(rand(0,1)){
                echo "<td >$i&nbsp;&nbsp;&nbsp;&nbsp;</td>";
             }else{
-               echo "<td><input type=text name=q$x size=5><input type=hidden name=r$x value=$i></td>";
+               echo "<td><input type=text name=q$x size=5></td>";
+               array_push($results,$x);
+               
                $x++;
             }
          }
@@ -25,9 +28,10 @@ function display_countingtable_problem($argument1,$argument2){
             echo "</tr><tr>";
          }
       }
+      $_SESSION['results']=$results;
 
 
-   echo "</tr></table><input type=hidden name=argument1 value=$argument1><input type=hidden name=argument2 value=$argument2><input type=hidden name=x value=$x><input type=submit value='submit'>";
+   echo "</tr></table><input type=hidden name=argument1 value=$argument1><input type=hidden name=argument2 value=$argument2><input type=submit value='submit'>";
 
 }
 

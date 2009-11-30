@@ -27,7 +27,12 @@ if (isset($_SESSION['iscorrect'])){
 }
 echo "<p>";
 
+if(isset($_SESSION['results'])){
+unset($_SESSION['results']);
+echo "<input type=submit>";
+}else{
 gen_new_countingtable_problem(1,25);
+}
 ?>
 </form>
 <script language="javascript">

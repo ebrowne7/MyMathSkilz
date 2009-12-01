@@ -1,6 +1,10 @@
 <?php
-function gen_new_skipcounting_problem($arg_min,$arg_max,$inc=2){
-   $argument1 = $arg_max;
+function gen_new_skipcounting_problem(){
+   $inc_array = array(1,2,3,4,5,10);
+   $inc_max= array(10,10,15,20,30,50);
+   $val = rand(0,count($inc_array)-1);
+   $inc=$inc_array[$val];
+   $argument1 = $inc_max[$val];
    #echo $argument1.' '.$argument2."\n";
    
    display_skipcounting_problem($argument1,$inc);
@@ -8,16 +12,22 @@ function gen_new_skipcounting_problem($arg_min,$arg_max,$inc=2){
 }
 
 function display_skipcounting_problem($argument1,$inc){
-
-   echo "<table width=440px border=1 valign=top cellpadding=0 cellspacing=0>
-	<tr valign=top>";
-
+   $_SESSION['inc'] = $inc;
    
+   echo "Complete the pattern<br/><table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
+	<tr valign=top>";
+      $_SESSION['results']=array();
       for($i = $inc;$i<= $argument1;$i+=$inc){
          if(((($argument1 / $inc)/2) +1 ) >= ($i / $inc)   ){
-            echo "<td>$i</td>";
+            echo "<td>$i&nbsp;&nbsp;&nbsp;&nbsp;,</td>";
          }else{
-            echo "<td><input type=text name=q$i></td>";
+            if(($i+$inc) <= $argument1){
+               echo "<td><input type=text name=q$i size=5></td><td>,</td>";
+            }else{
+               echo "<td><input type=text name=q$i size=5></td>";
+
+            }
+            array_push($_SESSION['results'],$i);
          }
       
       }
@@ -27,9 +37,23 @@ function display_skipcounting_problem($argument1,$inc){
 }
 
 function verifySkipCountingResult(){
+   $isnotcorrect = 0;
+   $argument1 = $_POST['argument1'];
+   $inc = $_SESSION['inc']; 
    if(isset($_POST['argument1'])){
       if($_SESSION['num_questions'] > 0){
-         if($_POST['argument1'] == $_POST['result']){
+      for($i=$_SESSION['inc']; $i<=$_POST['argument1'];$i+=$_SESSION['inc']){
+         if(((($argument1 / $inc)/2) +1 ) >= ($i / $inc)   ){
+            //nothing to do here 
+         }else{
+            if($_POST["q".$i] != array_shift($_SESSION['results'])){
+              $isnotcorrect =1;
+            }
+
+         }
+         
+      }
+         if(!$isnotcorrect){
              $_SESSION['correct']++;
              $_SESSION['iscorrect'] = true;
          }else{

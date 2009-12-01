@@ -27,7 +27,7 @@ if (isset($_SESSION['iscorrect'])){
 }
 echo "<p>";
 
-gen_new_skipcounting_problem(0,10,2);
+gen_new_skipcounting_problem();
 ?>
 </form>
 <script language="javascript">

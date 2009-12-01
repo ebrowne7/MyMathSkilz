@@ -40,7 +40,7 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
 
 
 
-function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false,$nf=true){
+function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false,$nf=true,$word=false){
    $argument1 = get_new_number($arg_min,$arg_max);
    if (!$doubles){
       $argument2 = get_new_number($arg_min,$arg_max);
@@ -58,10 +58,24 @@ function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false,$nf=true){
       }
       
    }
-   display_math_problem($argument1,$oper,$argument2,$nf);
+   if(!$word){
+      display_math_problem($argument1,$oper,$argument2,$nf);
+   }else{
+      display_word_problem($argument1,$oper,$argument2,$nf);
+   }
 
 }
 
+function display_word_problem($argument1,$oper,$argument2,$nf=false){
+   $img = get_image($oper);
+   $randimg = $img[rand(0,count($img)-1)];
+   $info = pathinfo($randimg);
+   $img_name=basename($randimg,'.'.$info['extension']);
+ 
+   preg_match('/[A-z]+/',$img_name,$matches);
+   $img_name = $matches[0];
+
+}
 
 function display_math_problem($argument1,$oper,$argument2,$nf=true){
    $img = get_image($oper);

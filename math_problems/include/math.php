@@ -88,8 +88,17 @@ function display_word_problem($argument1,$oper,$argument2,$nf=false){
       $img_name.="s";
    }
 
-   echo "There are $argument1 $img_name in the room and $argument2 more come in. How many $img_name in all?
-   <table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
+  switch ($oper){
+   case '+':
+      echo "There are $argument1 $img_name in the room.<br>$argument2 more come in.<br>How many $img_name in all?";
+      break;
+   case '-':
+      echo "There are $argument1 $img_name in the room.<br>$argument2 leave the room.<br>How many $img_name in all?";
+      break;
+   default:
+      echo "Invalid oper";
+  }
+echo "   <table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
 	<tr valign=top>";
 
    if($oper == '+'){

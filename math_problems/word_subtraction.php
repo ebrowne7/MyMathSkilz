@@ -32,7 +32,7 @@ gen_new_problem(0,10,'-',false,true,true);
 </form>
 <script language="javascript">
 <!--
-document.form1.result.focus()
+document.form1.rargument1.focus()
 //-->
 </script>
 <br/>

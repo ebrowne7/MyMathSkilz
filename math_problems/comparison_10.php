@@ -1,10 +1,10 @@
 <?php 
 session_start();
 include("./include/common.php");
-include("./include/math.php");
+include("./include/comparison.php");
 mySession();
 
-verifyResult();
+verifyComparisonResult();
    
 ?>
 <?php 
@@ -13,7 +13,7 @@ if($_SESSION['num_questions'] > 0){
 <html>
 <body>
 
-<form name=form1 method='post' action=word_addition.php>
+<form name=form1 method='post' action=comparison_10.php>
 <?php 
 #foreach($_POST as $key => $value){
 #   echo "Name: $key, Value: $value <br/>";
@@ -27,12 +27,12 @@ if (isset($_SESSION['iscorrect'])){
 }
 echo "<p>";
 
-gen_new_problem(0,10,'+',false,true,true);
+gen_new_comparison_problem(0,10);
 ?>
 </form>
 <script language="javascript">
 <!--
-document.form1.rargument1.focus()
+document.form1.result.focus()
 //-->
 </script>
 <br/>

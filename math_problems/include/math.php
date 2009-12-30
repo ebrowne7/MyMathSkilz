@@ -40,6 +40,26 @@ function check_problem($argument1, $oper, $argument2, $arg_min, $arg_max){
 
 
 
+function gen_new_oper_problem($arg_min,$arg_max,$nf=true){
+   $argument1 = get_new_number($arg_min,$arg_max);
+   $argument2 = get_new_number($arg_min,$arg_max);
+   
+   if(rand(0,1) == 0){
+      $oper = '+';
+      $_SESSION['oper']='+';
+   }else{
+      $oper = '-';
+      $_SESSION['oper']='-';
+   } 
+   while(!check_problem($argument1,$oper,$argument2,$arg_min,$arg_max)){
+
+      $argument1 = get_new_number($arg_min,$arg_max);
+      $argument2 = get_new_number($arg_min,$arg_max);
+   }
+   display_math_oper_problem($argument1,$oper,$argument2,$nf);
+}
+
+
 function gen_new_problem($arg_min,$arg_max,$oper,$doubles=false,$nf=true,$word=false){
    if($word){
       $_SESSION['wordproblem']=true;
@@ -168,6 +188,103 @@ if($oper == '+'){
 }
 }else{
    echo " <input type=text name=rargument1 size=5><input type=hidden name=oper value=$oper><input type=text name=rargument2 size=5><input type=text name='result' value='' size='5'> </td></tr></table><br><input type=submit value='submit'>";
+
+}
+
+}
+
+
+function display_math_oper_problem($argument1,$oper,$argument2,$nf=true){
+   $img = get_image($oper);
+   $randimg = $img[rand(0,(count($img) - 1))];
+   if($randimg == '' ){
+      $randimg='blank.gif';
+   }
+
+   if($nf){
+   echo "<table width=440px border=0 valign=top cellpadding=0 cellspacing=0>
+	<tr valign=top>";
+   }else{
+   echo "<table border=0 valign=top cellpadding=0 cellspacing=0>
+	<tr valign=top>";
+
+   }
+
+   if($oper == '+'){
+      echo "<td > ";
+   }else{
+      if($nf){
+      echo "<td colspan =5>";
+      }else{
+      echo "<td >";
+      }
+   }
+
+   if($nf){
+   if(!$_SESSION['noimage']){
+      if($argument1 == 0 ){
+         echo "<img src='img/blank.gif'>";
+      }
+      if($oper == '+'){
+      for($i = 0;$i< $argument1;$i++){
+         echo "<img src='img/add/$randimg' >";
+         if (($i !== 0) && (($i+1) % 5) ==0){ 
+            echo "<br/>";
+         }
+      }
+      }else{
+         $result = $argument1 - $argument2;
+         for($i=0; $i< $result; $i++){
+             echo "<img src='img/add/$randimg' >";
+            if (($i !== 0) && (($i+1) % 5) ==0){ 
+               echo "<br/>";
+            }
+         }
+         for($i=0; $i< $argument2; $i++){
+             echo "<img src='img/sub/$randimg' >";
+            if (($i !== 0) && (($i+1) % 5) ==0){ 
+               echo "<br/>";
+            }
+         }
+         
+
+      }
+      echo "</td><td ><img src='img/blank.gif'></td><td >";
+      if($argument2 == 0 ){
+         echo "<img src='img/blank.gif'>";
+      }
+      if($oper == '+'){
+         for($i = 0;$i< $argument2;$i++){
+            echo "<img src='img/add/$randimg' >";
+            if (($i !== 0) && (($i+1) % 5) ==0){
+               echo "<br/>";
+            }
+         }
+      }
+   }else{
+      echo "</td><td ><img src='img/blank.gif'></td><td >";
+   }
+   }else{
+   echo "</td><td>$argument1</td></tr><tr><td><input type=text name=oper value ='' size='2'></td><td>$argument2</td></tr><tr><td colspan=2><hr></td></tr><td colspan=2>";
+   }
+if($nf){
+if($oper == '+'){
+   $result = $argument1 + $argument2;
+   echo "</td><td >&nbsp;</td><td>&nbsp;</td></tr><tr ><td align=center>
+   $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center><input type=text name=oper value ='' size='2'> </td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=hidden name=result value=$result>$result </td></tr></table><input type=submit value='submit'>";
+}else{
+   $result = $argument1 - $argument2;
+   echo "</td></tr><tr ><td align=center>
+   $argument1<input type=hidden name=argument1 value=$argument1></td><td align=center> <input type=text name=oper value ='' size='2'></td><td align=center> $argument2  <input type=hidden name=argument2 value=$argument2></td><td>=</td><td><input type=hidden name=result value=$result>$result </td></tr></table><input type=submit value='submit'>";
+}
+}else{
+   if($oper == '+'){
+      $result = $argument1 + $argument2;
+   }else{
+      $result = $argument1 - $argument2;
+
+   }
+   echo " <input type=hidden name=argument1 value=$argument1><input type=hidden name=argument2 value=$argument2><input type=hidden name=result value=$result>$result </td></tr></table><br><input type=submit value='submit'>";
 
 }
 
